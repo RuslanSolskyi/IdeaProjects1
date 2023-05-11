@@ -7,7 +7,7 @@ let x = S(5,10)
 console.log(x)
 // - створити функцію яка обчислює та повертає площу кола з радіусом r
 function S20 (r) {
-    let result= r**2 ;
+    let result= math.PI*r**2 ;
     return result;
 }
 let x2 = S20(6)
