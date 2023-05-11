@@ -68,8 +68,8 @@ function M3(arr) {
     }
     return Masiv;
 }
-var myArray2 = [1, 'hello', true,1, 'hello', true];
-var Masiv = M3(myArray2);
+let myArray2 = [1, 'hello', true,1, 'hello', true];
+let Masiv = M3(myArray2);
 console.log(Masiv);
 
 
@@ -77,6 +77,16 @@ console.log(Masiv);
 
 // - створити функцію яка повертає найменьше число з масиву
 // - створити функцію sum(arr)яка приймає масив чисел, сумує значення елементів масиву та повертає його. Приклад sum([1,2,10]) //->13
+function sum(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+    return sum;
+}
+let array1 = [1,2,10];
+let Masiv3 = sum(array1);
+console.log(Masiv3);
 // - створити функцію swap(arr,index1,index2). Функція міняє місцями заняення у відаовідних індексах
 // Приклад  swap([11,22,33,44],0,1) //=> [22,11,33,44]
 function swap(arr, index1, index2) {
@@ -85,11 +95,11 @@ function swap(arr, index1, index2) {
     arr[index2] = temp;
     return arr;
 }
-const array = [11, 22, 33, 44];
+let array = [11, 22, 33, 44];
 
 
 
-var Masiv2 = swap(array,2,3);
+let Masiv2 = swap(array,2,3);
 console.log(Masiv2);
 // - Написати функцію обміну валюти exchange(sumUAH,currencyValues,exchangeCurrency)
 // // Приклад exchange(10000,[{currency:'USD',value:40},{currency:'EUR',value:42}],'USD') // => 250
