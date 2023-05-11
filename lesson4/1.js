@@ -76,6 +76,18 @@ console.log(Masiv);
 // -створити функцію яка приймає масив об'єктів з наступними полями id,name,age , та виводить їх в документ. Для кожного об'єкту окремий блок.
 
 // - створити функцію яка повертає найменьше число з масиву
+function findMin(arr) {
+    let min = arr[0];
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] < min) {
+            min = arr[i];
+        }
+    }
+    return min;
+}
+let array2 = [-12,1,2,10,-200];
+let Masiv4 = findMin(array2);
+console.log(Masiv4);
 // - створити функцію sum(arr)яка приймає масив чисел, сумує значення елементів масиву та повертає його. Приклад sum([1,2,10]) //->13
 function sum(arr) {
     let sum = 0;
