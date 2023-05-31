@@ -5,28 +5,28 @@ document.getElementById("myForm").addEventListener("submit", function(event) {
     event.preventDefault(); // Зупиняємо перезавантаження сторінки
 
     // Отримуємо значення полів форми
-    var name = document.getElementById("name").value;
-    var surname = document.getElementById("surname").value;
-    var age = document.getElementById("age").value;
+    let name = document.getElementById("name").value;
+    let surname = document.getElementById("surname").value;
+    let age = document.getElementById("age").value;
 
     // Створюємо об'єкт зі зчитаними даними
-    var data = {
+    let data = {
         name: name,
         surname: surname,
         age: age
     };
 
     // Виводимо об'єкт в документ
-    var output = document.getElementById("output");
+    let output = document.getElementById("output");
     output.innerHTML = "Об'єкт: " + JSON.stringify(data);
 });
 // ==========================
 // є сторінка, на якій є блок, я кому знаходиьтся цифра. написати код, який при кожному перезавантажені сторінки буде додавати до неї +1
 // Отримуємо посилання на блок з цифрою
-var numberBlock = document.getElementById("numberBlock");
+let numberBlock = document.getElementById("numberBlock");
 
 // Отримуємо поточне значення цифри з localStorage, або встановлюємо його як 0, якщо значення відсутнє
-var number = parseInt(localStorage.getItem("number")) || 0;
+let number = parseInt(localStorage.getItem("number")) || 0;
 
 // Додаємо 1 до числа
 number += 1;
@@ -40,10 +40,10 @@ localStorage.setItem("number", number);
 // Є сторінка index.html (назва довільна), при відвідуванні якої в локальне сховще, в масив sessions зберігається інформація про дату та час відвідування сторінки. Є ще сторінка sessions.html (назва довільна), при відвідуванні якої потрібно відмалювати всю інформацію про відвідування сторінки index.html. Інфу НЕ виводити в консоль, а побудувати дом структуру під кожну сессію
 // =========================
 // // Отримуємо поточну дату та час
-// var currentDate = new Date();
+// let currentDate = new Date();
 //
 // // Отримуємо масив сеансів з localStorage, або створюємо новий масив, якщо він відсутній
-// var sessions = JSON.parse(localStorage.getItem("sessions")) || [];
+// let sessions = JSON.parse(localStorage.getItem("sessions")) || [];
 //
 // // Додаємо поточну дату та час до масиву сеансів
 // sessions.push(currentDate.toString());
@@ -55,14 +55,14 @@ localStorage.setItem("number", number);
 // window.location.href = "sessions.html";
 // //-----------------------
 // // Отримуємо масив сеансів з localStorage
-// var sessions = JSON.parse(localStorage.getItem("sessions")) || [];
+// let sessions = JSON.parse(localStorage.getItem("sessions")) || [];
 //
 // // Отримуємо посилання на блок, в який будемо відображати сеанси
-// var sessionsBlock = document.getElementById("sessions");
+// let sessionsBlock = document.getElementById("sessions");
 //
 // // Перебираємо масив сеансів та відображаємо кожен сеанс в DOM
 // sessions.forEach(function(session) {
-//     var sessionElement = document.createElement("div");
+//     let sessionElement = document.createElement("div");
 //     sessionElement.className = "session";
 //     sessionElement.textContent = session;
 //     sessionsBlock.appendChild(sessionElement);
@@ -72,29 +72,29 @@ localStorage.setItem("number", number);
 //     При натисканні next виводяться настпні 10 об'єктів
 // При натисканні prev виводяться попередні 10 об'єктів
 //
-var objects = []; // Масив з 100 об'єктів
+let objects = []; // Масив з 100 об'єктів
 // Додайте об'єкти до масиву, наприклад:
-for (var i = 1; i <= 100; i++) {
+for (let i = 1; i <= 100; i++) {
     objects.push({ id: i, name: 'Об\'єкт ' + i });
 }
 
-var currentPage = 1; // Поточна сторінка
-var pageSize = 10; // Кількість об'єктів на сторінку
+let currentPage = 1; // Поточна сторінка
+let pageSize = 10; // Кількість об'єктів на сторінку
 
 function renderPage(page) {
-    var output2 = document.getElementById("output2");
+    let output2 = document.getElementById("output2");
     output2.innerHTML = ""; // Очищення контейнера перед виведенням нових об'єктів
 
-    var startIndex = (page - 1) * pageSize;
-    var endIndex = startIndex + pageSize;
+    let startIndex = (page - 1) * pageSize;
+    let endIndex = startIndex + pageSize;
 
-    for (var i = startIndex; i < endIndex; i++) {
+    for (let i = startIndex; i < endIndex; i++) {
         if (i >= objects.length) {
             break;
         }
 
-        var object = objects[i];
-        var div = document.createElement("div");
+        let object = objects[i];
+        let div = document.createElement("div");
         div.textContent = "ID: " + object.id + ", Name: " + object.name;
         output2.appendChild(div);
     }
@@ -108,7 +108,7 @@ function prevPage() {
 }
 
 function nextPage() {
-    var totalPages = Math.ceil(objects.length / pageSize);
+    let totalPages = Math.ceil(objects.length / pageSize);
     if (currentPage < totalPages) {
         currentPage++;
         renderPage(currentPage);
@@ -123,7 +123,7 @@ renderPage(currentPage);
 // - Створити довільний елемент з id = text та створити кнопку.Використовуючи JavaScript, зробіть так, щоб при натисканні на кнопку зникав елемент з id="text".
 //
 function hideElement() {
-    var element = document.getElementById("text");
+    let element = document.getElementById("text");
     element.style.display = "none";
 }
 //
@@ -131,8 +131,8 @@ function hideElement() {
 //
 //
 function verifyAge() {
-    var ageInput = document.getElementById("ageInput");
-    var age = parseInt(ageInput.value);
+    let ageInput = document.getElementById("ageInput");
+    let age = parseInt(ageInput.value);
 
     if (isNaN(age)) {
         alert("Введіть коректний вік");
@@ -147,13 +147,13 @@ function verifyAge() {
 //     При натисканні кнопки, вся ця інформація зчитується і формується табличка, з відповідним вмістом.
 // (Додатковачастина для завдання)
 function createTable() {
-    var rowsInput = document.getElementById("rowsInput"); // Отримуємо елемент input для кількості рядків
-    var colsInput = document.getElementById("colsInput"); // Отримуємо елемент input для кількості ячейок
-    var contentInput = document.getElementById("contentInput"); // Отримуємо елемент input для вмісту ячейок
+    let rowsInput = document.getElementById("rowsInput"); // Отримуємо елемент input для кількості рядків
+    let colsInput = document.getElementById("colsInput"); // Отримуємо елемент input для кількості ячейок
+    let contentInput = document.getElementById("contentInput"); // Отримуємо елемент input для вмісту ячейок
 
-    var rows = parseInt(rowsInput.value); // Отримуємо значення кількості рядків та перетворюємо його на ціле число
-    var cols = parseInt(colsInput.value); // Отримуємо значення кількості ячейок та перетворюємо його на ціле число
-    var content = contentInput.value; // Отримуємо значення вмісту ячейок
+    let rows = parseInt(rowsInput.value); // Отримуємо значення кількості рядків та перетворюємо його на ціле число
+    let cols = parseInt(colsInput.value); // Отримуємо значення кількості ячейок та перетворюємо його на ціле число
+    let content = contentInput.value; // Отримуємо значення вмісту ячейок
 
     // Перевіряємо, чи введені значення є коректними
     if (isNaN(rows) || isNaN(cols) || rows < 1 || cols < 1 || content.trim() === '') {
@@ -161,17 +161,17 @@ function createTable() {
         return;
     }
 
-    var tableContainer = document.getElementById("tableContainer"); // Отримуємо контейнер для таблиці
+    let tableContainer = document.getElementById("tableContainer"); // Отримуємо контейнер для таблиці
     tableContainer.innerHTML = ''; // Очищуємо контейнер перед створенням нової таблиці
 
-    var table = document.createElement("table"); // Створюємо елемент <table>
+    let table = document.createElement("table"); // Створюємо елемент <table>
 
     // Створюємо рядки та ячейки таблиці згідно з введеними значеннями
-    for (var i = 0; i < rows; i++) {
-        var row = document.createElement("tr"); // Створюємо рядок таблиці
+    for (let i = 0; i < rows; i++) {
+        let row = document.createElement("tr"); // Створюємо рядок таблиці
 
-        for (var j = 0; j < cols; j++) {
-            var cell = document.createElement("td"); // Створюємо ячейку таблиці
+        for (let j = 0; j < cols; j++) {
+            let cell = document.createElement("td"); // Створюємо ячейку таблиці
             cell.textContent = content; // Задаємо вміст ячейки
             row.appendChild(cell); // Додаємо ячейку до рядка
         }
@@ -187,32 +187,32 @@ function createTable() {
 //     зміна ціни відбувається тільки на перезавантаження, які відбулись пізніше ніж 10 секунд після попереднього.
 //     При перезавантаженні, яке відбулось раніше ніж минуло 10 секунд - нічого не відбувається
 // Отримуємо елемент блоку ціни
-var priceBlock2 = document.getElementById("priceBlock2");
+let priceBlock2 = document.getElementById("priceBlock2");
 
 // Перевіряємо, чи була збережена попередня дата оновлення ціни
-var lastUpdatedDate = localStorage.getItem("lastUpdatedDate");
+let lastUpdatedDate = localStorage.getItem("lastUpdatedDate");
 if (lastUpdatedDate) {
     // Перетворюємо збережену дату в об'єкт Date
-    var lastDate = new Date(lastUpdatedDate);
+    let lastDate = new Date(lastUpdatedDate);
 
     // Отримуємо поточну дату та час
-    var currentDate = new Date();
+    let currentDate = new Date();
 
     // Розраховуємо різницю між поточною датою та останньою оновленою датою в секундах
-    var timeDiff = Math.abs(currentDate - lastDate) / 1000;
+    let timeDiff = Math.abs(currentDate - lastDate) / 1000;
 
     // Перевіряємо, чи пройшло менше ніж 10 секунд з останнього оновлення
     if (timeDiff >= 10) {
         // Оновлюємо ціну, додаючи 10грн
-        var currentPrice = parseInt(priceBlock2.textContent) + 10;
+        let currentPrice = parseInt(priceBlock2.textContent) + 10;
         priceBlock2.textContent = currentPrice + "грн";
 
         // Зберігаємо нову дату оновлення ціни
-        var newUpdatedDate = new Date().toString();
+        let newUpdatedDate = new Date().toString();
         localStorage.setItem("lastUpdatedDate", newUpdatedDate);
     }
 } else {
     // Якщо це перше завантаження сторінки, зберігаємо поточну дату як останню дату оновлення ціни
-    var initialUpdatedDate = new Date().toString();
+    let initialUpdatedDate = new Date().toString();
     localStorage.setItem("lastUpdatedDate", initialUpdatedDate);
 }
