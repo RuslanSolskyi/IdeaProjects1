@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="1.css">
+
+</head>
+<body>
+
+<form id="myForm">
+    <label for="name">Ім'я:</label>
+    <input type="text" id="name" required><br><br>
+
+    <label for="surname">Прізвище:</label>
+    <input type="text" id="surname" required><br><br>
+
+    <label for="age">Вік:</label>
+    <input type="number" id="age" required><br><br>
+
+    <input type="submit" value="Відправити">
+</form>
+
+<div id="output"></div>
+----------
+<div id="numberBlock">Цифра: </div>
+----------
+<!--<div id="sessions"></div>-->
+----------
+<br>
+<div id="output2"></div>
+<button onclick="prevPage()">Prev</button>
+<button onclick="nextPage()">Next</button>
+----------
+<br>
+<div id="text">Це довільний елемент для приховування</div>
+<button onclick="hideElement()">Приховати</button>
+----------
+<br>
+<label for="ageInput">Введіть ваш вік:</label>
+<input type="number" id="ageInput" min="0">
+<button onclick="verifyAge()">Підтвердити</button>
+-----------
+<label for="rowsInput">Кількість рядків:</label>
+<input type="number" id="rowsInput" min="1">
+<br>
+<label for="colsInput">Кількість ячейок:</label>
+<input type="number" id="colsInput" min="1">
+<br>
+<label for="contentInput">Вміст ячейок:</label>
+<input type="text" id="contentInput">
+<br>
+<button onclick="createTable()">Створити таблицю</button>
+--------
+<div id="tableContainer"></div>
+-----------
+<div id="priceBlock2">100грн</div>
+
+<script src="1.js">
+</script>
+</body>
+</html>
