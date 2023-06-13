@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+<script>
+    // Отримуємо поточну дату та час
+    var currentDate = new Date();
+
+    // Отримуємо збережений масив сесій з локального сховища або створюємо новий масив, якщо він ще не існує
+    var sessions = JSON.parse(localStorage.getItem("sessions")) || [];
+
+    // Додаємо поточну дату та час до масиву сесій
+    sessions.push(currentDate);
+
+    // Зберігаємо оновлений масив сесій у локальному сховищі
+    localStorage.setItem("sessions", JSON.stringify(sessions));
+</script>
+</body>
+</html>

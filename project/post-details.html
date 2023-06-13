@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post Details</title>
+</head>
+<body>
+<h1>Post Details</h1>
+<div id="post-details"></div>
+<h2>Comments</h2>
+<ul id="comments-list"></ul>
+
+<script>
+    // Отримуємо ідентифікатор поста з параметрів URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const postId = urlParams.get('id');
+
+    // Перевіряємо, чи отримано ідентифікатор поста
+    if (postId) {
+        // Запит на отримання детальної інформації про пост
+        fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`)
+            .then(response => response.json())
+            .then(post => {
+                const postDetails = document.getElementById('post-details');
+
+                // Виводимо всю інформацію про пост
+                for (const key in post) {
+                    const postInfo = document.createElement('p');
+                    postInfo.textContent = `${key}: ${post[key]}`;
+                    postDetails.appendChild(postInfo);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        // Запит на отримання коментарів до поста
+        fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`)
+            .then(response => response.json())
+            .then(comments => {
+                const commentsList = document.getElementById('comments-list');
+
+                // Виводимо коментарі до поста
+                comments.forEach(comment => {
+                    const commentItem = document.createElement('li');
+                    const commentName = document.createElement('p');
+                    const commentEmail = document.createElement('p');
+                    const commentBody = document.createElement('p');
+
+                    commentName.textContent = `Name: ${comment.name}`;
+                    commentEmail.textContent = `Email: ${comment.email}`;
+                    commentBody.textContent = `Body: ${comment.body}`;
+
+                    commentItem.appendChild(commentName);
+                    commentItem.appendChild(commentEmail);
+                    commentItem.appendChild(commentBody);
+
+                    commentsList.appendChild(commentItem);
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    } else {
+        console.error('Missing post ID');
+    }
+</script>
+</body>
+</html>

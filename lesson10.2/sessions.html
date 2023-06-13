@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sessions</title>
+</head>
+<body>
+<div id="sessionsContainer"></div>
+
+<script>
+    // Отримуємо збережений масив сесій з локального сховища
+    var sessions = JSON.parse(localStorage.getItem("sessions"));
+
+    // Отримуємо контейнер для сесій
+    var sessionsContainer = document.getElementById("sessionsContainer");
+
+    // Перевіряємо, чи є збережені сесії
+    if (sessions && sessions.length > 0) {
+        // Проходимося по кожній сесії
+        sessions.forEach(function(session) {
+            // Створюємо елемент для відображення сесії
+            var sessionElement = document.createElement("div");
+            sessionElement.textContent = session;
+
+            // Додаємо елемент сесії до контейнера
+            sessionsContainer.appendChild(sessionElement);
+        });
+    } else {
+        // Якщо немає збережених сесій, відображаємо повідомлення
+        sessionsContainer.textContent = "Немає доступних сесій";
+    }
+</script>
+</body>
+</html>

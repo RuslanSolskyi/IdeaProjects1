@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User List</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .user-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .user-block {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .user-id {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .user-name {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .details-button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .details-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+<h1>User List</h1>
+<div id="user-list"></div>
+
+<script>
+    // Функція для отримання списку користувачів
+    function getUsers() {
+        const userList = document.getElementById('user-list');
+
+        // Виконуємо AJAX-запит на отримання списку користувачів
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(users => {
+                users.forEach(user => {
+                    // Створюємо блок користувача
+                    const userBlock = document.createElement('div');
+                    userBlock.classList.add('user-block');
+
+                    // Додаємо інформацію про користувача (id та name)
+                    const userInfo = document.createElement('p');
+                    userInfo.innerText = `ID: ${user.id}, Name: ${user.name}`;
+                    userBlock.appendChild(userInfo);
+
+                    // Створюємо кнопку для переходу до сторінки з деталізацією користувача
+                    const detailsButton = document.createElement('button');
+                    detailsButton.innerText = 'User Details';
+                    detailsButton.addEventListener('click', () => {
+                        window.location.href = `user-details.html?id=${user.id}`;
+                    });
+                    userBlock.appendChild(detailsButton);
+
+                    // Додаємо блок користувача до списку
+                    userList.appendChild(userBlock);
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
+
+    // Викликаємо функцію при завантаженні сторінки
+    window.onload = getUsers;
+</script>
+</body>
+</html>
