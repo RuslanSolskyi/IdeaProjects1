@@ -4,7 +4,25 @@
     <title>User Details</title>
     <style>
         .post {
+            display: inline-block;
+            width: 17%;
+            margin-right: 1%;
             margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            vertical-align: top;
+        }
+
+        #user-details {
+            margin-bottom: 20px;
+        }
+
+        #posts-button {
+            display: block;
+            width: 90%;
+            margin: 0 auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -30,7 +48,11 @@
                 // Виводимо всю інформацію про користувача
                 for (const key in user) {
                     const userInfo = document.createElement('p');
-                    userInfo.textContent = `${key}: ${user[key]}`;
+                    if (typeof user[key] === 'object') {
+                        userInfo.textContent = `${key}: ${JSON.stringify(user[key])}`;
+                    } else {
+                        userInfo.textContent = `${key}: ${user[key]}`;
+                    }
                     userDetails.appendChild(userInfo);
                 }
             })
@@ -51,10 +73,13 @@
                 .then(posts => {
                     // Виводимо заголовки постів поточного користувача
                     posts.forEach(post => {
+                        const postContainer = document.createElement('div');
+                        postContainer.classList.add('post');
+                        userPosts.appendChild(postContainer);
+
                         const postTitle = document.createElement('p');
-                        postTitle.classList.add('post');
                         postTitle.textContent = post.title;
-                        userPosts.appendChild(postTitle);
+                        postContainer.appendChild(postTitle);
 
                         // Додаємо кнопку для кожного поста
                         const postButton = document.createElement('button');
@@ -63,7 +88,7 @@
                             // Перехід на сторінку post-details.html з параметром ID поста
                             window.location.href = `post-details.html?id=${post.id}`;
                         });
-                        postTitle.appendChild(postButton);
+                        postContainer.appendChild(postButton);
                     });
                 })
                 .catch(error => {

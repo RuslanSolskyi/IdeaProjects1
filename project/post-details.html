@@ -2,13 +2,33 @@
 <html>
 <head>
     <title>Post Details</title>
+    <style>
+        .comment-item {
+            display: inline-block;
+            width: 22%;
+            margin-right: 1%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            vertical-align: top;
+        }
+
+        #comments-list {
+            text-align: center;
+        }
+
+        .row {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 <h1>Post Details</h1>
 <div id="post-details"></div>
 <h2>Comments</h2>
-<ul id="comments-list"></ul>
-
+<div id="comments-list"></div>
 <script>
     // Отримуємо ідентифікатор поста з параметрів URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -40,8 +60,21 @@
                 const commentsList = document.getElementById('comments-list');
 
                 // Виводимо коментарі до поста
-                comments.forEach(comment => {
-                    const commentItem = document.createElement('li');
+                let commentRow = document.createElement('div');
+                commentRow.classList.add('row');
+                commentsList.appendChild(commentRow);
+
+                comments.forEach((comment, index) => {
+                    if (index !== 0 && index % 4 === 0) {
+                        commentRow = document.createElement('div');
+                        commentRow.classList.add('row');
+                        commentsList.appendChild(commentRow);
+                    }
+
+                    const commentItem = document.createElement('div');
+                    commentItem.classList.add('comment-item');
+                    commentRow.appendChild(commentItem);
+
                     const commentName = document.createElement('p');
                     const commentEmail = document.createElement('p');
                     const commentBody = document.createElement('p');
@@ -53,8 +86,6 @@
                     commentItem.appendChild(commentName);
                     commentItem.appendChild(commentEmail);
                     commentItem.appendChild(commentBody);
-
-                    commentsList.appendChild(commentItem);
                 });
             })
             .catch(error => {
