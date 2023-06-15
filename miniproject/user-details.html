@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Details</title>
+    <style>
+        .post {
+            display: inline-block;
+            width: 17%;
+            margin-right: 1%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid black;
+            vertical-align: top;
+        }
+
+        #user-details {
+            margin-bottom: 20px;
+        }
+
+        #posts-button {
+            display: block;
+            width: 90%;
+            margin: 20px auto;
+
+        }
+    </style>
+</head>
+<body>
+<h1>User Details</h1>
+<div id="user-details"></div>
+<button id="posts-button">Posts of Current User</button>
+<div id="user-posts"></div>
+
+<script>
+    // Отримуємо ідентифікатор користувача з параметрів URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const userId = urlParams.get('id');
+
+    // Перевіряємо, чи отримано ідентифікатор користувача
+    if (userId) {
+        // Запит на отримання детальної інформації про користувача
+        fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+            .then(response => response.json())
+            .then(user => {
+                const userDetails = document.getElementById('user-details');
+
+                // Виводимо всю інформацію про користувача
+                for (const key in user) {
+                    const userInfo = document.createElement('p');
+                    if (typeof user[key] === 'object') {
+                        userInfo.textContent = `${key}: ${JSON.stringify(user[key])}`;
+                    } else {
+                        userInfo.textContent = `${key}: ${user[key]}`;
+                    }
+                    userDetails.appendChild(userInfo);
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        // Отримання постів поточного користувача
+        const postsButton = document.getElementById('posts-button');
+        const userPosts = document.getElementById('user-posts');
+
+        postsButton.addEventListener('click', () => {
+            userPosts.innerHTML = ''; // Очищуємо вміст перед кожним запитом
+
+            // Запит на отримання постів поточного користувача
+            fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`)
+                .then(response => response.json())
+                .then(posts => {
+                    // Виводимо заголовки постів поточного користувача
+                    posts.forEach(post => {
+                        const postContainer = document.createElement('div');
+                        postContainer.classList.add('post');
+                        userPosts.appendChild(postContainer);
+
+                        const postTitle = document.createElement('p');
+                        postTitle.textContent = post.title;
+                        postContainer.appendChild(postTitle);
+
+                        // Додаємо кнопку для кожного поста
+                        const postButton = document.createElement('button');
+                        postButton.textContent = 'View Post Details';
+                        postButton.addEventListener('click', () => {
+                            // Перехід на сторінку post-details.html з параметром ID поста
+                            window.location.href = `post-details.html?id=${post.id}`;
+                        });
+                        postContainer.appendChild(postButton);
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        });
+    } else {
+        console.error('Missing user ID');
+    }
+</script>
+</body>
+</html>
